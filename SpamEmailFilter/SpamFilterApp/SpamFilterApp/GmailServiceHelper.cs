@@ -15,7 +15,7 @@ namespace SpamFilterApp
     public static class GmailServiceHelper
     {
         private static readonly string[] Scopes = { GmailService.Scope.GmailReadonly };
-        private static readonly string ApplicationName = "SpamFilterApp";
+        private static readonly string ApplicationName = "spamemail";
 
         public static GmailService GetGmailService()
         {
