@@ -145,7 +145,6 @@
     <Compile Include="ClassificationResult.cs" />
     <Compile Include="Email.cs" />
     <Compile Include="EmailData.cs" />
-    <Compile Include="GmailServiceHelper.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>

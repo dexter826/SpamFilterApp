@@ -48,7 +48,6 @@
             this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
-            this.btnFetchEmails = new DevExpress.XtraEditors.SimpleButton();
             this.btnReportSpam = new DevExpress.XtraEditors.SimpleButton();
             this.btn_Clear = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.memoEmailContent.Properties)).BeginInit();
@@ -64,13 +63,13 @@
             // 
             // btnClassify
             // 
-            this.btnClassify.Appearance.Font = new System.Drawing.Font("Tahoma", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClassify.Appearance.Font = new System.Drawing.Font("Tahoma", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClassify.Appearance.Options.UseFont = true;
             this.btnClassify.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnClassify.ImageOptions.SvgImage")));
             this.btnClassify.Location = new System.Drawing.Point(226, 506);
             this.btnClassify.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.btnClassify.Name = "btnClassify";
-            this.btnClassify.Size = new System.Drawing.Size(148, 44);
+            this.btnClassify.Size = new System.Drawing.Size(309, 44);
             this.btnClassify.TabIndex = 5;
             this.btnClassify.Text = "Kiểm tra";
             this.btnClassify.Click += new System.EventHandler(this.btnClassify_Click);
@@ -272,19 +271,6 @@
             this.panelControl1.Size = new System.Drawing.Size(1677, 218);
             this.panelControl1.TabIndex = 10;
             // 
-            // btnFetchEmails
-            // 
-            this.btnFetchEmails.Appearance.Font = new System.Drawing.Font("Tahoma", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnFetchEmails.Appearance.Options.UseFont = true;
-            this.btnFetchEmails.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnFetchEmails.ImageOptions.SvgImage")));
-            this.btnFetchEmails.Location = new System.Drawing.Point(384, 506);
-            this.btnFetchEmails.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            this.btnFetchEmails.Name = "btnFetchEmails";
-            this.btnFetchEmails.Size = new System.Drawing.Size(192, 44);
-            this.btnFetchEmails.TabIndex = 11;
-            this.btnFetchEmails.Text = "Kiểm tra Gmail";
-            this.btnFetchEmails.Click += new System.EventHandler(this.btnFetchEmails_Click);
-            // 
             // btnReportSpam
             // 
             this.btnReportSpam.Appearance.BackColor = System.Drawing.Color.Yellow;
@@ -321,7 +307,6 @@
             this.ClientSize = new System.Drawing.Size(1710, 814);
             this.Controls.Add(this.btn_Clear);
             this.Controls.Add(this.btnReportSpam);
-            this.Controls.Add(this.btnFetchEmails);
             this.Controls.Add(this.panelControl1);
             this.Controls.Add(this.btnBrowse);
             this.Controls.Add(this.txtDuongDan);
@@ -332,8 +317,11 @@
             this.Controls.Add(this.memoEmailContent);
             this.Controls.Add(this.btnClassify);
             this.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.IconOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("MainForm.IconOptions.SvgImage")));
             this.Margin = new System.Windows.Forms.Padding(6);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Spam Email Filter";
@@ -373,7 +361,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
-        private DevExpress.XtraEditors.SimpleButton btnFetchEmails;
         private DevExpress.XtraEditors.SimpleButton btnReportSpam;
         private DevExpress.XtraEditors.SimpleButton btn_Clear;
     }

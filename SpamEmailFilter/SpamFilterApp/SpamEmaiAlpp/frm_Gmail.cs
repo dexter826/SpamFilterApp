@@ -224,7 +224,7 @@ namespace SpamEmaiAlpp
 
         private void btb_Exit_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Application.ExitThread();
         }
 
         /// <summary>
@@ -234,7 +234,7 @@ namespace SpamEmaiAlpp
         /// <param name="e"></param>
         private void timer1_Tick(object sender, EventArgs e)
         {
-            panel_Loading.Width += 5;
+            panel_Loading.Width += 7;
             if (panel_Loading.Width >= 1027)
             {
                 timer1.Stop();

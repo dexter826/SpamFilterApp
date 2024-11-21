@@ -170,65 +170,6 @@ namespace SpamFilterApp
             }
         }
 
-        private void btnFetchEmails_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                // Gọi phương thức lấy service Gmail
-                var service = GmailServiceHelper.GetGmailService();
-
-                // Lấy danh sách email chưa đọc
-                var emails = GmailServiceHelper.GetEmails(service, "in:inbox is:unread", maxResults: 1);
-                if (emails == null || emails.Count == 0)
-                {
-                    XtraMessageBox.Show("Không có email chưa đọc nào!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return;
-                }
-
-                // Lấy email chưa đọc mới nhất (email đầu tiên trong danh sách)
-                var latestEmail = emails.First();
-                var emailContent = GmailServiceHelper.GetEmailContent(service, latestEmail.Id);
-
-                // Kiểm tra nếu nội dung email rỗng
-                if (string.IsNullOrEmpty(emailContent))
-                {
-                    XtraMessageBox.Show("Không thể lấy nội dung email.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-
-                // Hiển thị nội dung email lên memo
-                memoEmailContent.Text = emailContent;
-
-                // Phân loại email và lấy kết quả cùng với xác suất
-                var (result, spamProbability, notSpamProbability, spamWordProbabilities, notSpamWordProbabilities) =
-                    _classifier.ClassifyWithWordProbabilities(emailContent);
-
-                // Hiển thị thông báo kết quả phân loại
-                string message = $"Kết quả: {result} \nXác suất Spam: {spamProbability}% \nXác suất không Spam: {notSpamProbability}%";
-                MessageBoxIcon icon = result == "Spam" ? MessageBoxIcon.Warning : MessageBoxIcon.Information;
-                XtraMessageBox.Show(message, "Thông báo", MessageBoxButtons.OK, icon);
-
-                lblResult.Text = message;
-
-                // Lưu vào lịch sử phân loại
-                _classificationHistory.Add(new ClassificationResult
-                {
-                    Content = emailContent,
-                    Result = result,
-                    SpamProbability = spamProbability,
-                    NotSpamProbability = notSpamProbability
-                });
-
-                UpdateEmailList();
-                UpdateChart(spamWordProbabilities, notSpamWordProbabilities);
-                // Cập nhật danh sách email vào GridControl
-            }
-            catch (Exception ex)
-            {
-                XtraMessageBox.Show("Đã xảy ra lỗi: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
         private void UpdateEmailList()
         {
             var bindingList = new BindingList<ClassificationResult>(
@@ -242,7 +183,6 @@ namespace SpamFilterApp
                 }).ToList());
 
             gridControlEmails.DataSource = bindingList; // Cập nhật DataSource
-            //gridViewEmail.FocusedRowHandle = -1; // Ngăn không cho tự động focus vào dòng đầu tiên
         }
 
         private void btnReportSpam_Click(object sender, EventArgs e)
