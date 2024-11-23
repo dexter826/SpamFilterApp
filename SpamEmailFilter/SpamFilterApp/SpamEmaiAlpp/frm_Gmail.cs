@@ -46,7 +46,7 @@ namespace SpamEmaiAlpp
             SetActiveButton(btn_Inbox); // Đặt nút Inbox là nút đang chọn
 
             // Tải dữ liệu từ file CSV
-            string filePath = @"C:\CongNghe.Net\NaiveBayes\Dataset\email_dataset.csv"; // Thay đổi đường dẫn đến file của bạn
+            string filePath = @"C:\CongNghe.Net\NaiveBayes\Dataset\email_dataset.csv";
             LoadData(filePath);
 
             // Gọi phương thức kiểm tra email khi form được khởi tạo

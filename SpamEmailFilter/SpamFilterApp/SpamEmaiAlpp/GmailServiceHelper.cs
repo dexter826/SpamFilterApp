@@ -15,6 +15,9 @@ namespace SpamEmaiAlpp
 {
     public static class GmailServiceHelper
     {
+        /// <summary>
+        /// Phạm vi truy cập của ứng dụng.
+        /// </summary>
         private static readonly string[] Scopes = {
         GmailService.Scope.GmailSend, // Quyền gửi email
         GmailService.Scope.GmailReadonly // Quyền đọc email
@@ -22,6 +25,10 @@ namespace SpamEmaiAlpp
 
         private static readonly string ApplicationName = "SpamEmailAlpp";
 
+        /// <summary>
+        /// Khởi tạo và trả về một đối tượng GmailService sử dụng OAuth2 credentials.
+        /// </summary>
+        /// <returns>GmailService</returns>
         public static GmailService GetGmailService()
         {
             UserCredential credential;
@@ -47,6 +54,13 @@ namespace SpamEmaiAlpp
             });
         }
 
+        /// <summary>
+        /// Lấy danh sách các email dựa trên truy vấn.
+        /// </summary>
+        /// <param name="service"></param>
+        /// <param name="query"></param>
+        /// <param name="maxResults"></param>
+        /// <returns></returns>
         public static List<Message> GetEmails(GmailService service, string query, int maxResults = 10)
         {
             var request = service.Users.Messages.List("me");
@@ -57,6 +71,12 @@ namespace SpamEmaiAlpp
             return response.Messages?.ToList() ?? new List<Message>();
         }
 
+        /// <summary>
+        /// ấy thông tin chi tiết về một email cụ thể.
+        /// </summary>
+        /// <param name="service"></param>
+        /// <param name="messageId"></param>
+        /// <returns></returns>
         public static Email GetEmailDetails(GmailService service, string messageId)
         {
             var email = service.Users.Messages.Get("me", messageId).Execute();
@@ -86,6 +106,11 @@ namespace SpamEmaiAlpp
             };
         }
 
+        /// <summary>
+        /// Trích xuất và giải mã nội dung của một email.
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
         public static string GetEmailContent(Message email)
         {
             if (email?.Payload?.Parts == null)
@@ -99,6 +124,13 @@ namespace SpamEmaiAlpp
             return Encoding.UTF8.GetString(data);
         }
 
+        /// <summary>
+        /// Gửi email.
+        /// </summary>
+        /// <param name="service"></param>
+        /// <param name="to"></param>
+        /// <param name="subject"></param>
+        /// <param name="body"></param>
         public static void SendEmail(GmailService service, string to, string subject, string body)
         {
             var emailMessage = new AE.Net.Mail.MailMessage
@@ -121,6 +153,11 @@ namespace SpamEmaiAlpp
             service.Users.Messages.Send(msg, "me").Execute();
         }
 
+        /// <summary>
+        /// Mã hóa chuỗi thành chuỗi Base64 URL.
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         private static string Base64UrlEncode(string input)
         {
             var inputBytes = System.Text.Encoding.UTF8.GetBytes(input);

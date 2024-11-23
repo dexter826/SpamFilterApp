@@ -8,14 +8,17 @@ namespace SpamFilterApp
 {
     public class NaiveBayesClassifier
     {
-        private List<Email> _emails; // Danh sách email đã được huấn luyện
-        private Dictionary<string, int> _spamCount; // Đếm số từ trong email spam
-        private Dictionary<string, int> _hamCount; // Đếm số từ trong email không spam
+        private readonly List<Email> _emails; // Danh sách email đã được huấn luyện
+        private readonly Dictionary<string, int> _spamCount; // Đếm số từ trong email spam
+        private readonly Dictionary<string, int> _hamCount; // Đếm số từ trong email không spam
         private int _totalSpam; // Tổng số email spam
         private int _totalHam; // Tổng số email không spam
         private int _totalSpamWords; // Tổng số từ trong tập dữ liệu spam
         private int _totalHamWords; // Tổng số từ trong tập dữ liệu không spam
 
+        /// <summary>
+        /// Khởi tạo một đối tượng NaiveBayesClassifier.
+        /// </summary>
         public NaiveBayesClassifier()
         {
             _emails = new List<Email>();
@@ -27,6 +30,10 @@ namespace SpamFilterApp
             _totalHamWords = 0;
         }
 
+        /// <summary>
+        /// Huấn luyện mô hình với một email.
+        /// </summary>
+        /// <param name="email"></param>
         public void Train(Email email)
         {
             _emails.Add(email);
@@ -44,6 +51,11 @@ namespace SpamFilterApp
             }
         }
 
+        /// <summary>
+        /// Đếm số lần xuất hiện của từ trong email.
+        /// </summary>
+        /// <param name="countDict"></param>
+        /// <param name="content"></param>
         private void AddToCount(Dictionary<string, int> countDict, string content)
         {
             var words = content.ToLower().Split(new[] { ' ', '.', ',', '!', '?' }, StringSplitOptions.RemoveEmptyEntries);
@@ -56,6 +68,11 @@ namespace SpamFilterApp
             }
         }
 
+        /// <summary>
+        /// Phân loại một email là spam hay không spam.
+        /// </summary>
+        /// <param name="content"></param>
+        /// <returns></returns>
         public (string result, double spamProbability, double notSpamProbability, Dictionary<string, double> spamWordProbabilities, Dictionary<string, double> notSpamWordProbabilities) ClassifyWithWordProbabilities(string content)
         {
             // Loại bỏ ký tự xuống dòng và khoảng trắng thừa
@@ -92,6 +109,13 @@ namespace SpamFilterApp
             return (result, Math.Exp(logSpamProbability), Math.Exp(logNotSpamProbability), spamWordProbabilities, notSpamWordProbabilities);
         }
 
+        /// <summary>
+        /// Lấy xác suất của một từ trong email.
+        /// </summary>
+        /// <param name="word"></param>
+        /// <param name="wordCounts"></param>
+        /// <param name="total"></param>
+        /// <returns></returns>
         public double GetWordProbability(string word, Dictionary<string, int> wordCounts, int total)
         {
             // Tính toán xác suất của từ dựa trên số lần xuất hiện và tổng số từ
