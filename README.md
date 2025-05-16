@@ -68,11 +68,11 @@ Dưới đây là một số hình ảnh minh họa cho ứng dụng SpamFilterA
 
 ### Dataset
 
-![Giao diện chính](./images/100_email_dataset.png)
+![Dataset](./images/100_email_dataset.png)
 
 ### Giao diện chính
 
-![Phân loại spam](./images/main.png)
+![Giao diện chính](./images/main.png)
 
 ## Cấu trúc dự án
 
