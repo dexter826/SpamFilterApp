@@ -6,11 +6,12 @@ SpamFilterApp là một ứng dụng Windows Forms được phát triển bằng
 
 ### Thông tin sinh viên
 
-- **Họ và tên:** Trần Công Minh
+- **Họ và tên:** Trần Công Minh - 2001222641
 - **Trường:** Đại học Công Thương (HUIT)
 - **Ngành:** Công nghệ thông tin
 - **Email:** tcongminh1604@gmail.com
-- **Số điện thoại:** (+84)777999496
+- **Số điện thoại:** (+84) 777999496
+- **Cộng tác:** Lê Đức Trung - 2001225676
 
 ## Tính năng chính
 
