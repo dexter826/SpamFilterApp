@@ -30,6 +30,15 @@ SpamFilterApp là một ứng dụng Windows Forms được phát triển bằng
 
 ## Cài đặt
 
+### Trước khi bắt đầu
+
+1. Bạn cần tạo file `credentials.json` cho Google API để sử dụng tính năng kết nối với Gmail.
+2. Sao chép file `credentials.json.example` và đổi tên thành `credentials.json`.
+3. Đăng ký ứng dụng tại [Google Cloud Console](https://console.cloud.google.com/) và nhận client_id và client_secret.
+4. Điền thông tin client_id và client_secret vào file `credentials.json`.
+
+### Các bước cài đặt
+
 1. Đảm bảo máy tính của bạn đã cài đặt .NET Framework 4.5 trở lên
 2. Cài đặt DevExpress (nếu chưa có)
 3. Clone hoặc tải xuống mã nguồn từ repository
@@ -52,6 +61,18 @@ SpamFilterApp là một ứng dụng Windows Forms được phát triển bằng
 2. Nhấn nút "Báo cáo Spam" để đánh dấu email đó là spam
 3. Xác nhận hành động của bạn
 4. Email sẽ được thêm vào tập dữ liệu spam và mô hình sẽ được cập nhật
+
+## Demo hình ảnh ứng dụng
+
+Dưới đây là một số hình ảnh minh họa cho ứng dụng SpamFilterApp:
+
+### Dataset
+
+![Giao diện chính](./images/100_email_dataset.png)
+
+### Giao diện chính
+
+![Phân loại spam](./images/main.png)
 
 ## Cấu trúc dự án
 

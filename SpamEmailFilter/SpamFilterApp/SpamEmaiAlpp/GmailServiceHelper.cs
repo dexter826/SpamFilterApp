@@ -19,8 +19,8 @@ namespace SpamEmaiAlpp
         /// Phạm vi truy cập của ứng dụng.
         /// </summary>
         private static readonly string[] Scopes = {
-        GmailService.Scope.GmailSend, // Quyền gửi email
-        GmailService.Scope.GmailReadonly // Quyền đọc email
+            GmailService.Scope.GmailSend, // Quyền gửi email
+            GmailService.Scope.GmailReadonly // Quyền đọc email
         };
 
         private static readonly string ApplicationName = "SpamEmailAlpp";
@@ -28,11 +28,17 @@ namespace SpamEmaiAlpp
         /// <summary>
         /// Khởi tạo và trả về một đối tượng GmailService sử dụng OAuth2 credentials.
         /// </summary>
-        /// <returns>GmailService</returns>
+        /// <returns>GmailService</returns>        
         public static GmailService GetGmailService()
         {
             UserCredential credential;
-            string credPath = @"C:\CongNghe.Net\NaiveBayes\SpamEmailFilter\SpamFilterApp\credentials.json";
+            // Sử dụng đường dẫn tương đối thay vì đường dẫn tuyệt đối
+            string credPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "credentials.json");
+
+            if (!File.Exists(credPath))
+            {
+                throw new FileNotFoundException("credentials.json không tồn tại. Vui lòng tạo file theo mẫu credentials.json.example");
+            }
 
             using (var stream = new FileStream(credPath, FileMode.Open, FileAccess.Read))
             {
@@ -72,7 +78,7 @@ namespace SpamEmaiAlpp
         }
 
         /// <summary>
-        /// ấy thông tin chi tiết về một email cụ thể.
+        /// Lấy thông tin chi tiết về một email cụ thể.
         /// </summary>
         /// <param name="service"></param>
         /// <param name="messageId"></param>
@@ -131,13 +137,14 @@ namespace SpamEmaiAlpp
         /// <param name="to"></param>
         /// <param name="subject"></param>
         /// <param name="body"></param>
-        public static void SendEmail(GmailService service, string to, string subject, string body)
+        /// <param name="from">Optional email address to use as sender. If not provided, uses the authenticated user's email.</param>
+        public static void SendEmail(GmailService service, string to, string subject, string body, string from = null)
         {
             var emailMessage = new AE.Net.Mail.MailMessage
             {
                 Subject = subject,
                 Body = body,
-                From = new MailAddress("leductrung0907@gmail.com")
+                From = new MailAddress(from ?? service.Users.GetProfile("me").Execute().EmailAddress)
             };
             emailMessage.To.Add(new MailAddress(to));
             emailMessage.ReplyTo.Add(emailMessage.From);
